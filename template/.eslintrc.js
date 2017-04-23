@@ -4,7 +4,7 @@ module.exports = {
   root: true,
   parser: 'babel-eslint',
   parserOptions: {
-    sourceType: 'module'
+    sourceType: 'module',
   },
   env: {
     browser: true,
@@ -18,16 +18,16 @@ module.exports = {
   {{/if_eq}}
   // required to lint *.vue files
   plugins: [
-    'html'
+    'html',
   ],
   {{#if_eq lintConfig "airbnb"}}
   // check if imports actually resolve
   'settings': {
     'import/resolver': {
       'webpack': {
-        'config': 'build/webpack.base.conf.js'
-      }
-    }
+        'config': 'build/webpack.base.conf.js',
+      },
+    },
   },
   {{/if_eq}}
   // add your custom rules here
@@ -42,14 +42,18 @@ module.exports = {
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       'js': 'never',
-      'vue': 'never'
+      'vue': 'never',
     }],
     // allow optionalDependencies
     'import/no-extraneous-dependencies': ['error', {
-      'optionalDependencies': ['test/unit/index.js']
+      'optionalDependencies': ['test/unit/index.js'],
     }],
     {{/if_eq}}
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'comma-dangle': [
+      2,
+      'always-multiline',
+    ],
   }
 }
