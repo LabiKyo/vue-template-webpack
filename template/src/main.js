@@ -21,6 +21,6 @@ new Vue({
   {{/if_eq}}
   {{#if_eq build "standalone"}}
   template: '<App/>',
-  components: { App }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+  components: { App },
   {{/if_eq}}
 }){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
