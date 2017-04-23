@@ -1,10 +1,12 @@
+var merge = require('webpack-merge')
+
 const variables = [
 ]
 let result = {}
-for (const key of variables) {
-  result[key] = JSON.stringify(process.env[key])
-}
+variables.forEach(function(key) {
+  result[key] = '"' + process.env[key] + '"'
+})
 
-module.exports = Object.assign({
+module.exports = merge({
   NODE_ENV: '"production"',
 }, result)

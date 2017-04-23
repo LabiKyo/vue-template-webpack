@@ -16,18 +16,18 @@ module.exports = function (config) {
     reporters: ['spec', 'coverage'],
     files: ['./index.js'],
     preprocessors: {
-      './index.js': ['webpack', 'sourcemap']
+      './index.js': ['webpack', 'sourcemap'],
     },
     webpack: webpackConfig,
     webpackMiddleware: {
-      noInfo: true{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+      noInfo: true,
     },
     coverageReporter: {
       dir: './coverage',
       reporters: [
         { type: 'lcov', subdir: '.' },
-        { type: 'text-summary' }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
+        { type: 'text-summary' },
       ]
-    }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  }){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+    },
+  }),
 }{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
