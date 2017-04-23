@@ -11,8 +11,11 @@
     "unit": "npm run unit-watch -- --single-run",
     "unit-watch": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"{{/unit}}{{#e2e}},
     "e2e": "node test/e2e/runner.js"{{/e2e}}{{#if_or unit e2e}},
-    "test": "{{#unit}}npm run unit{{/unit}}{{#unit}}{{#e2e}} && {{/e2e}}{{/unit}}{{#e2e}}npm run e2e{{/e2e}}"{{/if_or}}{{#lint}},
-    "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}"{{/lint}}
+    "test": "concurrently {{#unit}}\"npm run unit\"{{/unit}}{{#e2e}}\"npm run e2e\"{{/e2e}}"{{/if_or}}{{#lint}},
+    "lint": "eslint --ext .js,.vue src{{#unit}} test/unit/specs{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",{{/lint}}
+    "hook": "concurrently {{#lint}}\"npm run lint\"{{/lint}} {{#unit}}\"npm run unit\"{{/unit}} {{#e2e}}\"npm run e2e\"{{/e2e}}",
+    "precommit": "npm run hook",
+    "prepush": "npm run hook"
   },
   "dependencies": {
     "vue": "^2.2.6"{{#router}},
@@ -30,6 +33,8 @@
     "babel-preset-stage-0": "^6.22.0",
     "babel-register": "^6.22.0",
     "chalk": "^1.1.3",
+    "concurrently": "^3.4.0",
+    "husky": "^0.13.3",
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
